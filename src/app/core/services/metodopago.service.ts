@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
 import { apiEndPoint } from '../constant/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MetodopagoService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { 
+  getMetodoPago(): Observable<IResponse<IMetodoPago[]>> {
+    return this.http.get<IResponse<IMetodoPago[]>>(
+      `${apiEndPoint.MetodoPagoEndPoint.get}`
+    );
   }
-  
-  getLugar(): Observable<IResponse<IMetodoPago[]>>{
-    return this.http.get<IResponse<IMetodoPago[]>>(`${apiEndPoint.MetodoPagoEndPoint.get}`)
-}
 }

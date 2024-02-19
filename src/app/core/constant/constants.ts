@@ -21,5 +21,11 @@ export const apiEndPoint = {
   },
   MetodoPagoEndPoint: {
     get: `${apirUrl}/MetodoPago`
+  },
+  TransaccionEndPoint: {
+    getByFecha: `${apirUrl}/Transaccion`,
+    post: `${apirUrl}/Transaccion`
   }
 };
+
+// ?mes=${mes}

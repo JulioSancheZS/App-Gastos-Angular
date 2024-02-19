@@ -3,6 +3,8 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}", // add this line
     "./node_modules/flowbite/**/*.js", // add this line
+    // "./node_modules/flowbite/dist/datepicker.js"
+
   ],
   darkMode: "class",
   theme: {

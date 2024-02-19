@@ -8,7 +8,7 @@
                     <p class="text-gray-500 dark:text-gray-400">Registra tus movimientos y lleva un control de tus
                         gastos</p>
                 </div>
-                <button type="button"
+                <button type="button" (click)="openModalPanel()"
                     class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                     <svg class="h-5 w-5 mr-2 -ml-1 text-white-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -33,25 +33,11 @@
 </button>
 
 <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
-    <!-- <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-      <div class="w-full">
-        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos Pendientes</h3>
-        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 2,340</span>
-      </div>
-      <div class="w-full" id="new-products-chart"></div>
-    </div>
-    <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-      <div class="w-full">
-        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos Pagados</h3>
-        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 4,500</span>
-      </div>
-      <div class="w-full" id="week-signups-chart"></div>
-    </div> -->
     <div
         class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
         <div class="w-full">
             <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Total</h3>
-            <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 1,500</span>
+            <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ {{totalMonto}}</span>
         </div>
         <div class="w-full" id="new-products-chart"></div>
     </div>
@@ -60,14 +46,11 @@
 
 <div
     class="items-center mt-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-
-
-
     <div class="relative overflow-x-auto w-full">
 
 
         <div class="flex justify-center items-center">
-            <button type="button"
+            <button type="button" (click)="retrocederUnMes()"
                 class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24">
@@ -76,10 +59,10 @@
                 </svg>
             </button>
             <button type="button"
-                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Febrero
-                2024
+                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                {{ nombreMes}} {{anio}}
             </button>
-            <button type="button"
+            <button type="button" (click)="avanzarUnMes()"
                 class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24">
@@ -89,15 +72,14 @@
             </button>
         </div>
 
-
         <table class="w-full text-sm mt-3 text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Descripcion
+                        Producto
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Producto
+                        Descripción
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Categoria
@@ -109,7 +91,7 @@
                         Metodo Pago
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Precio
+                        Monto
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Fecha Transacción
@@ -117,33 +99,187 @@
                 </tr>
             </thead>
             <tbody>
+                @for(item of listTransaccion; track item.idTransaccion){
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Fornicacion masiva
+                        {{item.producto}}
                     </th>
                     <td class="px-6 py-4">
-                        Silvia
+                        {{item.descripcion}}
                     </td>
                     <td class="px-6 py-4">
-                        Cariñosas
+                        {{item.nombreCategoria}}
                     </td>
                     <td class="px-6 py-4">
-                        El Fenix
+                        {{item.nombreLugar}}
                     </td>
                     <td class="px-6 py-4">
-                        Efectivo
+                        {{item.nombreMetodoPago}}
                     </td>
                     <td class="px-6 py-4">
-                        c$ 1500
+                        C$ {{item.monto}}
                     </td>
                     <td class="px-6 py-4">
-                        16/02/2024
+                        {{item.fechaTransaccion}}
                     </td>
                 </tr>
-
+                }@empty {
+                    <div class="mt-5 flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                        <span class="font-medium">Info alert!</span> No hay transacciones para este mes!
+                        </div>
+                    </div>
+                }
             </tbody>
         </table>
     </div>
-
-
 </div>
+
+
+<app-add-movimiento [headerText]="tituloModal" [isOpen]="isSlidePanelOpen" (onClose)="onCloseModalPanel()">
+    <form [formGroup]="formsTransaccion" (ngSubmit)="onSubmit();">
+        <div class="mb-4">
+            <div class="grid gap-4 mt-4 mb-4 sm:grid-cols-2">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producto</label>
+                    <input type="text" formControlName="producto"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Producto" required="">
+
+                    @if(formsTransaccion.get('producto')?.hasError('required') &&
+                    formsTransaccion.get('producto')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">ups!</span> El producto es requerido.
+                    </p>
+                    }
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Monto</label>
+                    <input type="number" formControlName="monto"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Monto" required="">
+
+                    @if(formsTransaccion.get('monto')?.hasError('required') &&
+                    formsTransaccion.get('monto')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">ups!</span> El monto es requerida.
+                    </p>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+                <input type="text" formControlName="descripcion"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Descripción" required="">
+
+                <!-- @if(formsTransaccion.get('descripcion')?.hasError('required') &&
+                    formsTransaccion.get('descripcion')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                      <span class="font-medium">ups!</span> El monto es requerida.
+                    </p>
+                    } -->
+            </div>
+
+            <div class="grid gap-4 mt-4 mb-4 sm:grid-cols-2">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+                    <select formControlName="categoria"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @for(item of listCategoria; track item.idCategoria){
+                        <option [value]="item.idCategoria">{{item.nombreCategoria}}</option>
+                        }
+                    </select>
+
+                    @if(formsTransaccion.get('categoria')?.hasError('required') &&
+                    formsTransaccion.get('monto')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">ups!</span> La categoria es requerida.
+                    </p>
+                    }
+                </div>
+                <div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">¿Donde
+                            compraste?</label>
+                        <select formControlName="lugar"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            @for(item of listLugar; track item.idLugar){
+                            <option [value]="item.idLugar">{{item.nombreLugar}}</option>
+                            }
+                        </select>
+
+                        @if(formsTransaccion.get('lugar')?.hasError('required') &&
+                        formsTransaccion.get('lugar')?.touched){
+                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                            <span class="font-medium">ups!</span> El lugar de compra es requerido.
+                        </p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="grid gap-4 mt-4 mb-4 sm:grid-cols-2">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">¿Con que
+                        pagaste?</label>
+                    <select formControlName="metodoPago"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @for(item of listMetodoPago; track item.idMetodoPago){
+                        <option [value]="item.idMetodoPago">{{item.descripcion}}</option>
+                        }
+                    </select>
+
+                    @if(formsTransaccion.get('metodoPago')?.hasError('required') &&
+                    formsTransaccion.get('metodoPago')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">ups!</span> El método de pago es requerido.
+                    </p>
+                    }
+                </div>
+                <div>
+
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">¿Fecha del
+                        gasto?</label>
+
+                    <div class="relative max-w-sm">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </div>
+                        <input datepicker datepicker-autohide type="date" formControlName="datapickerFechaTransaccion"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Selecciona la fecha">
+                    </div>
+
+                    @if(formsTransaccion.get('datapickerFechaTransaccion')?.hasError('required') &&
+                    formsTransaccion.get('datapickerFechaTransaccion')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                        <span class="font-medium">ups!</span> La fecha es requerido.
+                    </p>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <button type="submit"
+            class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clip-rule="evenodd" />
+            </svg>
+            Guardar
+        </button>
+    </form>
+</app-add-movimiento>
