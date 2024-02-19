@@ -1,0 +1,156 @@
+<!-- Start block -->
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
+    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <!-- Start coding here -->
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                <div class="w-full md:w-1/2">
+                    <form class="flex items-center">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                    fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input type="text"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Buscar" required="">
+                        </div>
+                    </form>
+                </div>
+                <div
+                    class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                    <button (click)="openModalPanel()" type="button"
+                        class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <svg class="h-5 w-5 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                        </svg>
+                        Nueva Categoria
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-4">Descripcion</th>
+                            <th scope="col" class="px-4 py-3">Icono</th>
+                            <th scope="col" class="px-4 py-3">Color</th>
+                            <th scope="col" class="px-4 py-3">Actiones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(item of nuevoArray; track item.idCategoria){
+                        <tr class="border-b dark:border-gray-700">
+                            <th scope="row"
+                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{item.nombreCategoria}}</th>
+                            <td class="px-4 py-3">{{item.icono}}</td>
+                            <td class="px-4 py-3" >
+                              <div class="w-5 h-5 rounded bg-[{{item.color}}]"></div>
+                            </td>
+                            <td class="px-4 py-3">
+                                <button type="button"
+                                (click)="onEditarForm(item)" 
+                                class="flex text-white  bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    <svg class="w-5 h-5 mr-2 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10.8 17.8-6.4 2.1 2.1-6.4m4.3 4.3L19 9a3 3 0 0 0-4-4l-8.4 8.6m4.3 4.3-4.3-4.3m2.1 2.1L15 9.1m-2.1-2 4.2 4.2"/>
+                                      </svg>
+                                    Editar</button>
+                            </td>
+                        </tr>
+                        }@empty {
+                            <div class="mt-5 flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                  <span class="font-medium">Info alert!</span> No hay categorias para mostrar, crea nuevas categorias!!
+                                </div>
+                              </div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-add-edit-categoria [headerText]="tituloModal" [isOpen]="isSlidePanelOpen" (onClose)="onCloseModalPanel()">
+    <form [formGroup]="formsCategoria" (ngSubmit)="onSubmit();">
+        <div class="mb-4">
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion</label>
+                <input type="text"
+                   formControlName="nombreCategoria"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Nombre Categoria" required="">
+
+                    @if(formsCategoria.get('nombreCategoria')?.hasError('required') &&
+                    formsCategoria.get('nombreCategoria')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                      <span class="font-medium">ups!</span> La Descripción es requerida.
+                    </p>
+                    }
+            </div>
+
+            <div class="grid gap-4 mt-4 mb-4 sm:grid-cols-2">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color</label>
+                    <input 
+                    formControlName="color"
+                    [colorPicker]="color" [value]="color" (colorPickerChange)="onColorChange($event)" [style.background]="color" [cpOutputFormat]="'hex'" type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        required="">
+
+                        @if(formsCategoria.get('color')?.hasError('required') &&
+                        formsCategoria.get('color')?.touched){
+                        <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                          <span class="font-medium">ups!</span> El Color es requerida.
+                        </p>
+                        }
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Icono</label>
+                    <div class="flex justify-start gap-3">
+                        <input 
+                        formControlName="icono"
+                        type="text" [value]="selectedEmoji"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                        <!-- <button type="button" (click)="onOpenPick()" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">🥰</button> -->
+                        <button (click)="onOpenPick()" type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            🥰</button>
+                    </div>
+                    @if(emojiPickerOpen){
+                    <emoji-mart emoji="point_up" (emojiClick)="handleEmojiClick($event)"></emoji-mart>
+                    }
+
+                    @if(formsCategoria.get('icono')?.hasError('required') &&
+                    formsCategoria.get('icono')?.touched){
+                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                      <span class="font-medium">ups!</span> El Icono es requerida.
+                    </p>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <button type="submit"
+            class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clip-rule="evenodd" />
+            </svg>
+            Guardar
+        </button>
+    </form>
+</app-add-edit-categoria>

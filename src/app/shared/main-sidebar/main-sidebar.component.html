@@ -1,0 +1,90 @@
+<app-header></app-header>
+<div class="flex h-full overflow-hidden bg-gray-50 dark:bg-gray-900 ">
+  <app-sidebar extraClass="border-r">
+    <app-sidebar-item-group>
+      @for (menu of sidebarMenu; track $index) {
+      @if(menu.submenu && menu.submenu.length > 0){
+      <button type="button"
+        class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+        aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
+        @if(!!menu.icon){
+          <span class="flex-shrink-0" [innerHTML]="menu.icon | sanitizeHtml"></span>
+        }
+        @if((sidebarService.$collapsed | async) === false){
+        <span class="flex-1 ml-3 text-left whitespace-nowrap" [class.ml-3]="!!menu.icon">
+          {{menu.title}}
+        </span>
+        }
+
+        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <ul id="dropdown-pages" class="hidden py-2 space-y-2">
+        @for(submenu of menu.submenu; track $index){
+        <li>
+          <a href={{submenu.href}}
+            class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+
+            @if((sidebarService.$collapsed | async) === false){
+            <span class="flex-1 whitespace-nowrap" [class.ml-3]="!!submenu.icon">
+              {{submenu.title}}
+            </span>
+            }
+          </a>
+        </li>
+        }
+      </ul>
+      }
+
+      @if(!menu.submenu || menu.submenu.length == 0){
+      <app-sidebar-item 
+      [icon]="menu.icon" 
+      [link]="menu.href">
+        {{ menu.title }}
+      </app-sidebar-item>
+      }
+    }
+    </app-sidebar-item-group>
+  </app-sidebar>
+  <main class="p-4 md:ml-64 pt-20 w-full mx-auto h-screen">
+    <router-outlet></router-outlet>
+    <!-- <app-footer></app-footer> -->
+  </main>
+</div>
+
+<!-- <app-header></app-header>
+<div class="flex h-full overflow-hidden bg-gray-50 dark:bg-gray-900">
+  <app-sidebar extraClass="border-r">
+    <app-sidebar-item-group>
+      @for (menu of sidebarMenu; track $index) {
+        @if(!menu.submenu || menu.submenu.length == 0){
+          <app-sidebar-item 
+          [icon]="menu.icon" 
+          [link]="menu.href">
+            {{ menu.title }}
+          </app-sidebar-item>
+        }
+
+        @if(menu.submenu && menu.submenu.length > 0){
+          @for(submenu of menu.submenu; track $index){
+            <app-sidebar-item 
+              [icon]="submenu.icon" 
+              [isSubMenu]="true"
+              [titleSubMenu]="menu.title"
+              [link]="submenu.href">
+              {{ submenu.title }}
+            </app-sidebar-item>
+          }  
+        } 
+      }
+    </app-sidebar-item-group>
+  </app-sidebar>
+  <main class="flex-1 overflow-auto p-4">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+ -->

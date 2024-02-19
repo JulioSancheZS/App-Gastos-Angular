@@ -1,0 +1,149 @@
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
+    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <!-- Start coding here -->
+        <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+            <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+                <div>
+                    <h5 class="mr-3 font-semibold dark:text-white">Movimientos</h5>
+                    <p class="text-gray-500 dark:text-gray-400">Registra tus movimientos y lleva un control de tus
+                        gastos</p>
+                </div>
+                <button type="button"
+                    class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    <svg class="h-5 w-5 mr-2 -ml-1 text-white-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                    </svg>
+                    Nuevo Movimiento
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<button type="button"
+    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2">
+    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
+    </svg>
+    Convertir a Dolares
+</button>
+
+<div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
+    <!-- <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos Pendientes</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 2,340</span>
+      </div>
+      <div class="w-full" id="new-products-chart"></div>
+    </div>
+    <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos Pagados</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 4,500</span>
+      </div>
+      <div class="w-full" id="week-signups-chart"></div>
+    </div> -->
+    <div
+        class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <div class="w-full">
+            <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Total</h3>
+            <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ 1,500</span>
+        </div>
+        <div class="w-full" id="new-products-chart"></div>
+    </div>
+</div>
+
+
+<div
+    class="items-center mt-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+
+
+    <div class="relative overflow-x-auto w-full">
+
+
+        <div class="flex justify-center items-center">
+            <button type="button"
+                class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 12h14M5 12l4-4m-4 4 4 4" />
+                </svg>
+            </button>
+            <button type="button"
+                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Febrero
+                2024
+            </button>
+            <button type="button"
+                class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 12H5m14 0-4 4m4-4-4-4" />
+                </svg>
+            </button>
+        </div>
+
+
+        <table class="w-full text-sm mt-3 text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Descripcion
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Producto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Categoria
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Lugar
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Metodo Pago
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precio
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha Transacción
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Fornicacion masiva
+                    </th>
+                    <td class="px-6 py-4">
+                        Silvia
+                    </td>
+                    <td class="px-6 py-4">
+                        Cariñosas
+                    </td>
+                    <td class="px-6 py-4">
+                        El Fenix
+                    </td>
+                    <td class="px-6 py-4">
+                        Efectivo
+                    </td>
+                    <td class="px-6 py-4">
+                        c$ 1500
+                    </td>
+                    <td class="px-6 py-4">
+                        16/02/2024
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
