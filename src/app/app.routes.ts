@@ -8,6 +8,7 @@ import { authGuard } from './core/guard/auth.guard';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { LugarComponent } from './pages/lugar/lugar.component';
 import { MovimientoComponent } from './pages/movimiento/movimiento.component';
+import { IngresosComponent } from './pages/ingresos/ingresos.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path:'movimiento',
         component: MovimientoComponent
+      },
+      {
+        path:'ingreso',
+        component: IngresosComponent
       }
     ],
   },

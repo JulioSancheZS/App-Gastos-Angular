@@ -25,6 +25,10 @@ export const apiEndPoint = {
   TransaccionEndPoint: {
     getByFecha: `${apirUrl}/Transaccion`,
     post: `${apirUrl}/Transaccion`
+  },
+  IngresoEndPoint: {
+    getByFecha: `${apirUrl}/Ingresos`,
+    post: `${apirUrl}/Ingresos`
   }
 };
 

@@ -16,13 +16,14 @@ import { LugarService } from '../../core/services/lugar.service';
 import { ILugar } from '../../core/models/lugar.model';
 import { MetodopagoService } from '../../core/services/metodopago.service';
 import { IMetodoPago } from '../../core/models/metodoPago.model';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-movimiento',
   standalone: true,
-  imports: [AddMovimientoComponent, ReactiveFormsModule],
+  imports: [AddMovimientoComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './movimiento.component.html',
   styleUrl: './movimiento.component.css',
 })
@@ -91,6 +92,7 @@ export class MovimientoComponent implements OnInit {
     // this.fechaActual = new Date
     // console.log(this.fechaActual)
     this.getTransaccionByMes(this.fechaActual)
+  
   }
 
   obtenerNombreMes(numeroMes: number): string {
@@ -116,6 +118,7 @@ export class MovimientoComponent implements OnInit {
       next: (response) => {
         if (response.value && response.value.length > 0) {
           this.listTransaccion = response.value;
+          console.log(this.listTransaccion)
           this.calcularTotalMonto(); 
           }else{
             this.totalMonto = 0
@@ -198,6 +201,7 @@ export class MovimientoComponent implements OnInit {
         next: (response) => {
           if (response.status) {
             this.onCloseModalPanel();
+            this.getTransaccionByMes(this.fechaActual!)
             console.log(response.msg);
           }
         },
