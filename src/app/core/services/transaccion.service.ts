@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { FetchBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IMetodoPago } from '../models/metodoPago.model';
 import { IResponse } from '../models/responseApi.model';
@@ -13,11 +13,17 @@ export class TransaccionService {
   constructor(private http: HttpClient) {}
 
   getTransaccion(mes: Date): Observable<IResponse<ITransaccion[]>> {
-    // Formatear el mes en el formato deseado (por ejemplo, 'YYYY-MM')
-    const formattedMonth = mes.toISOString(); // Formato 'YYYY-MM'
+    const year = mes.getFullYear();
 
-    // Concatenar el mes formateado a la URL
-    const url = `${apiEndPoint.TransaccionEndPoint.getByFecha}?mes=${formattedMonth}`;
+    // Agregar 1 al mes, ya que los meses en JavaScript van de 0 a 11
+    const month = (mes.getMonth() + 1).toString().padStart(2, '0');
+    const day = mes.getDate().toString().padStart(2, '0');
+
+    // Formatear la fecha en el formato deseado ('yyyy/mm/dd')
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // Concatenamos el mes formateado a la URL
+    const url = `${apiEndPoint.TransaccionEndPoint.getByFecha}?mes=${formattedDate}`;
 
     // Realizar la solicitud HTTP
     return this.http.get<IResponse<ITransaccion[]>>(url);

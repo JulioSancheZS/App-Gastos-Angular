@@ -12,9 +12,15 @@ export class IngresosService {
   constructor(private http: HttpClient) {}
 
   getIngresos(mes: Date): Observable<IResponse<IIngresos[]>> {
-    const formattedMonth = mes.toISOString();
+    const year = mes.getFullYear();
 
-    const url = `${apiEndPoint.IngresoEndPoint.getByFecha}?mes=${formattedMonth}`;
+ // Agregar 1 al mes, ya que los meses en JavaScript van de 0 a 11
+ const month = (mes.getMonth() + 1).toString().padStart(2, '0');
+ const day = mes.getDate().toString().padStart(2, '0');
+
+ // Formatear la fecha en el formato deseado ('yyyy/mm/dd')
+ const formattedDate = `${year}-${month}-${day}`;
+    const url = `${apiEndPoint.IngresoEndPoint.getByFecha}?mes=${formattedDate}`;
 
     return this.http.get<IResponse<IIngresos[]>>(url);
   }

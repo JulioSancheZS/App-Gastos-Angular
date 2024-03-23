@@ -22,6 +22,7 @@
     "flowbite": "^2.2.1",
     "guid-typescript": "^1.0.9",
     "ngx-color-picker": "^16.0.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

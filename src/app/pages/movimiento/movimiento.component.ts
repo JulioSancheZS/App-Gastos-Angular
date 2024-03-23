@@ -17,13 +17,12 @@ import { ILugar } from '../../core/models/lugar.model';
 import { MetodopagoService } from '../../core/services/metodopago.service';
 import { IMetodoPago } from '../../core/models/metodoPago.model';
 import { CommonModule } from '@angular/common';
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-movimiento',
   standalone: true,
-  imports: [AddMovimientoComponent, ReactiveFormsModule, CommonModule],
+  imports: [AddMovimientoComponent, ReactiveFormsModule, CommonModule, NgxPaginationModule],
   templateUrl: './movimiento.component.html',
   styleUrl: './movimiento.component.css',
 })
@@ -31,6 +30,8 @@ export class MovimientoComponent implements OnInit {
   /**
    *
    */
+
+  p: number = 1;
 
   listTransaccion: ITransaccion[] = [];
 
@@ -79,6 +80,7 @@ export class MovimientoComponent implements OnInit {
       descripcion: new FormControl('', [Validators.required]),
       metodoPago: new FormControl('', [Validators.required]),
     });
+    
   }
 
   ngOnInit(): void {
@@ -118,15 +120,17 @@ export class MovimientoComponent implements OnInit {
       next: (response) => {
         if (response.value && response.value.length > 0) {
           this.listTransaccion = response.value;
-          console.log(this.listTransaccion)
+          // console.log(this.listTransaccion)
           this.calcularTotalMonto(); 
           }else{
             this.totalMonto = 0
             this.listTransaccion = []  
+
         }
       },
     });
   }
+
 
   avanzarMes(fecha: Date): Date {
     // Obtenemos el mes actual
