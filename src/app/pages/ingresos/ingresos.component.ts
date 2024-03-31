@@ -5,15 +5,18 @@ import { IngresosService } from '../../core/services/ingresos.service';
 import { Guid } from 'guid-typescript';
 import { CommonModule } from '@angular/common';
 import { AddIngresosComponent } from './modal/add-ingresos/add-ingresos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-ingresos',
   standalone: true,
-  imports: [CommonModule, AddIngresosComponent, ReactiveFormsModule],
+  imports: [CommonModule, AddIngresosComponent, ReactiveFormsModule,NgxPaginationModule],
   templateUrl: './ingresos.component.html',
   styleUrl: './ingresos.component.css'
 })
 export class IngresosComponent implements OnInit{
+
+  p: number = 1;
 
   listIngresos: IIngresos[] = [];
 

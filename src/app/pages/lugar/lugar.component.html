@@ -49,28 +49,39 @@
                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{item.nombreLugar}}</th>
                             <td class="px-4 py-3">
-                                <button type="button"
-                                (click)="onEditarForm(item)" 
-                                class="flex text-white  bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                    <svg class="w-5 h-5 mr-2 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10.8 17.8-6.4 2.1 2.1-6.4m4.3 4.3L19 9a3 3 0 0 0-4-4l-8.4 8.6m4.3 4.3-4.3-4.3m2.1 2.1L15 9.1m-2.1-2 4.2 4.2"/>
-                                      </svg>
+                                <button type="button" (click)="onEditarForm(item)"
+                                    class="flex text-white  bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    <svg class="w-5 h-5 mr-2 text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m10.8 17.8-6.4 2.1 2.1-6.4m4.3 4.3L19 9a3 3 0 0 0-4-4l-8.4 8.6m4.3 4.3-4.3-4.3m2.1 2.1L15 9.1m-2.1-2 4.2 4.2" />
+                                    </svg>
                                     Editar</button>
                             </td>
                         </tr>
                         }@empty {
-                            <div class="mt-5 flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                  <span class="font-medium">Info alert!</span> No hay Lugares para mostrar, crea nuevos lugares!!
-                                </div>
-                              </div>
+                        <div class="mt-5 flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                            role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Info alert!</span> No hay Lugares para mostrar, crea nuevos
+                                lugares!!
+                            </div>
+                        </div>
                         }
                     </tbody>
                 </table>
+                <pagination-controls 
+                (pageChange)="p = $event" 
+                previousLabel="Anterior" 
+                nextLabel="Siguiente">
+                </pagination-controls>
             </div>
         </div>
     </div>
@@ -82,17 +93,16 @@
         <div class="mb-4">
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion</label>
-                <input type="text"
-                   formControlName="nombreLugar"
+                <input type="text" formControlName="nombreLugar"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Nombre Lugar" required="">
 
-                    @if(formLugar.get('nombreLugar')?.hasError('required') &&
-                    formLugar.get('nombreLugar')?.touched){
-                    <p class="mt-1 text-xs text-red-600 dark:text-red-400">
-                      <span class="font-medium">ups!</span> El Nombre del Lugar es requerida.
-                    </p>
-                    }
+                @if(formLugar.get('nombreLugar')?.hasError('required') &&
+                formLugar.get('nombreLugar')?.touched){
+                <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                    <span class="font-medium">ups!</span> El Nombre del Lugar es requerida.
+                </p>
+                }
             </div>
 
         </div>

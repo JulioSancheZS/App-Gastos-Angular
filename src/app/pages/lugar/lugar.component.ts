@@ -10,11 +10,12 @@ import { ILugar } from '../../core/models/lugar.model';
 import { LugarService } from '../../core/services/lugar.service';
 import { AddEditLugarComponent } from './modal/add-edit-lugar/add-edit-lugar.component';
 import { Guid } from 'guid-typescript';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-lugar',
   standalone: true,
-  imports: [ReactiveFormsModule, AddEditLugarComponent],
+  imports: [ReactiveFormsModule, AddEditLugarComponent, NgxPaginationModule],
   templateUrl: './lugar.component.html',
   styleUrl: './lugar.component.css',
 })
@@ -22,6 +23,9 @@ export class LugarComponent implements OnInit {
   /**
    *
    */
+
+  p: number = 1;
+
 
   constructor(private fb: FormBuilder, private lugarService: LugarService) {
     this.formLugar = this.fb.group({

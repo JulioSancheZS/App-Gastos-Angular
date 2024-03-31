@@ -36,7 +36,7 @@
         class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
         <div class="w-full">
             <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Total</h3>
-            <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">C$ {{totalMonto.toFixed(2)}}</span>
+            <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{totalMonto.toFixed(2) | currency:'C$':true}}</span>
         </div>
         <div class="w-full" id="new-products-chart"></div>
     </div>
@@ -92,7 +92,7 @@
                         </th>
                         
                         <td class="px-6 py-4">
-                            C$ {{ (item.monto != null && item.monto != undefined) ? item.monto.toFixed(2) : '' }}
+                            {{ (item.monto != null && item.monto != undefined) ? (item.monto | currency:'C$':true) : '' }}
                         </td>
                         <td class="px-6 py-4">
                             {{ item.fechaIngreso | date:'dd/MM/yyyy' }}
@@ -112,6 +112,11 @@
                     }
                 </tbody>
             </table>
+            <pagination-controls 
+                (pageChange)="p = $event" 
+                previousLabel="Anterior" 
+                nextLabel="Siguiente">
+                </pagination-controls>
         </div>
     </div>
 </div>

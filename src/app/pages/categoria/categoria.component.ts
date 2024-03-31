@@ -6,11 +6,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CategoriaService } from '../../core/services/categoria.service';
 import { ICategoria } from '../../core/models/categoria.model';
 import { Guid } from 'guid-typescript';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-categoria',
   standalone: true,
-  imports: [AddEditCategoriaComponent, ColorPickerModule, PickerComponent, ReactiveFormsModule],
+  imports: [AddEditCategoriaComponent, ColorPickerModule, PickerComponent, ReactiveFormsModule, NgxPaginationModule],
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.css'
 })
@@ -23,6 +24,8 @@ export class CategoriaComponent implements OnInit {
          color: new FormControl('', [Validators.required]),
       });
   }
+
+  p: number = 1;
 
   formsCategoria!: FormGroup
 

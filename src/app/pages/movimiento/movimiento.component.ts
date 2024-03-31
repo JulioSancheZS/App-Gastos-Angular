@@ -53,7 +53,6 @@ export class MovimientoComponent implements OnInit {
 
   totalMonto: number = 0;
 
-
   //Modal
   onCloseModalPanel() {
     this.isSlidePanelOpen = false;
