@@ -1,20 +1,226 @@
 
+<div>
+  <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
+    <div
+      class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Mi Balance</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{balance?.monto?.toFixed(2) | currency:'C$':true}}</span>
+      </div>
+      <div class="w-full" id="new-products-chart"></div>
+    </div>
+    <div
+      class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos del mes</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{  totalGastos }}</span>
+      </div>
+    </div>
+    <div
+      class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <div class="w-full">
+        <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Total de Transacciones del Mes</h3>
+        <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">    {{ numTotalGastos }} </span>
+      </div>
+    </div>
+  </div>
 
-<div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
-  <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <div class="w-full">
-      <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Mi Balance</h3>
-      <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{balance?.monto}}</span>
-     
+  <div class="grid gap-4 xl:grid-cols-2 mt-4">
+
+    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Últimas transacciones
+      </h3>
+      <div class="border-t border-gray-200 dark:border-gray-600">
+        <div class="pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+              <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th scope="col"
+                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                    Fecha Transacción
+                  </th>
+                  <th scope="col"
+                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                    Número
+                  </th>
+                  <th scope="col"
+                    class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                    Total
+                  </th>
+              
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800">
+
+                @for (item of ultimosGastos; track item.idTransaccion) {
+                  <tr>
+                  <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                    <span class="font-semibold">{{ item.producto}}</span>
+                  </td>
+                  <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    {{item.fechaTransaccion | date}}
+                  </td>
+                  <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ (item.monto != null && item.monto != undefined) ? (item.monto | currency:'C$':true) : '' }}
+                  </td>
+                </tr>
+                }
+
+              </tbody>
+            </table>
+
+            <!-- @for (item of ultimosGastos; track item.idTransaccion) {
+            <li class="py-3 sm:py-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center min-w-0">
+                  <div class="ml-3">
+                    <p class="font-medium text-gray-900 truncate dark:text-white">
+                      {{item.producto}}
+                    </p>
+                  </div>
+                </div>
+                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  {{ item.fechaTransaccion | date:'dd/MM/yyyy' }}
+                </div>
+                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                   {{ (item.monto != null && item.monto != undefined) ? (item.monto | currency:'C$':true) : '' }}
+                </div>
+              </div>
+            </li>
+            } -->
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="w-full" id="new-products-chart"></div>
-  </div>
-  <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <div class="w-full">
-      <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos del mes de febrero</h3>
-      <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">2,340</span>
-     
+  
+    <div class="2xl:col-span-1 bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+      <div class="flex justify-center">
+        <div class="flex-col items-center">
+          <div class="flex items-center mb-1">
+            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Gastos por categoría</h5>
+          </div>
+          <div class="relative max-w-sm mt-3">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+              </svg>
+            </div>
+            <form [formGroup]="formDate">
+              <input datepicker datepicker-autohide type="date" formControlName="fechaFiltroCharts"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Selecciona la fecha">
+            </form>
+          </div>
+            <div class="flex justify-between items-start mt-5">  
+                  <apx-chart
+                  [series]="chartOptions.series!"
+                  [chart]="chartOptions.chart!"
+                  [labels]="chartOptions.labels"
+                  [responsive]="chartOptions.responsive!"
+                ></apx-chart>
+              </div>
+        </div>
+      </div>
+    
+    <div class="py-6" id="aca-va-el-charts"></div>
+      <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+        <div class="flex justify-between items-center pt-5">
+          <!-- Button -->
+          <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
+            class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
+            type="button">
+            Filtrar
+            <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 4 4 4-4" />
+            </svg>
+          </button>
+          <div id="lastDaysdropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Día</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mes</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Año</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+
+
+    <!-- Lista de Transaccion por semana -->
+  <div class="p-4 bg-white 2xl:col-span-2 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+      <!-- Card header -->
+      <div class="items-center justify-between lg:flex">
+        <div class="mb-4 lg:mb-0">
+          <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Transacciones</h3>
+          <span class="text-base font-normal text-gray-500 dark:text-gray-400">Esta es una lista de las últimas
+            transacciones de la semana.</span>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="flex flex-col mt-6">
+        <div class="overflow-x-auto rounded-lg">
+          <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow sm:rounded-lg">
+              <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                <thead class="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th scope="col"
+                      class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                      Fecha Transacción
+                    </th>
+                    <th scope="col"
+                      class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                      Número
+                    </th>
+                    <th scope="col"
+                      class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                      Total
+                    </th>
+                    <th scope="col"
+                      class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                      Estado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-gray-800">
+  
+                  @for (item of resumen; track $index) {
+                  <tr>
+                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                      <span class="font-semibold">{{ item.fecha}}</span>
+                    </td>
+                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      {{item.totalTransacciones}}
+                    </td>
+                    <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ (item.totalGastos != null && item.totalGastos != undefined) ? (item.totalGastos | currency:'C$':true) : '' }}
+                    </td>
+                    <td class="p-4 whitespace-nowrap">
+                      <span
+                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">Completada</span>
+                    </td>
+                  </tr>
+                  }
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+
 

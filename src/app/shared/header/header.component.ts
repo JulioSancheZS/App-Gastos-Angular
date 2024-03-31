@@ -23,6 +23,8 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated$;
+  
+  isOpen: boolean = false
 
   constructor(
     readonly sidebarService: SidebarService,
@@ -47,5 +49,9 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.tokenService.removeToken();
     this.routes.navigate(['/']);
+  }
+
+  openToggle(){
+    this.isOpen = !this.isOpen
   }
 }

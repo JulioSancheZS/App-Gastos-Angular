@@ -32,6 +32,15 @@ export const apiEndPoint = {
   },
   BalanceEndPoint: {
     getBalanceById: `${apirUrl}/Balance`
+  },
+  DashboardEndPoin:{
+    getUltimosGastos : `${apirUrl}/Dashboard/ultimosGastos`,
+    getResumen : `${apirUrl}/Dashboard/resumen`,
+    getGastosPorCategoriaPorFecha : `${apirUrl}/Dashboard/gastosPorCategoriaPorFecha`,
+    getGastosPorCategoriaPorMes : `${apirUrl}/Dashboard/gastosPorCategoriaPorMes`,
+    getGastosPorCategoriaPorAnio : `${apirUrl}/Dashboard/gastosPorCategoriaPorAnio`,
+    getNumGastosMes: `${apirUrl}/Dashboard/totalNumGastos`, 
+    getTotalGastosMes: `${apirUrl}/Dashboard/totalGastos`,
   }
 };
 

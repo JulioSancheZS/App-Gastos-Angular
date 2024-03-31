@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
     initFlowbite();
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  clearLocalStorage(event: any) {
-    this.tokenService.removeToken()
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // clearLocalStorage(event: any) {
+  //   this.tokenService.removeToken()
+  // }
 }

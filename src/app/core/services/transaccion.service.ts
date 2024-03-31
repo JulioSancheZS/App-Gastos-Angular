@@ -29,8 +29,7 @@ export class TransaccionService {
     return this.http.get<IResponse<ITransaccion[]>>(url);
   }
 
-  postTransaccion(data: ITransaccion): Observable<IResponse<ITransaccion>>{
-    return this.http.post<IResponse<ITransaccion>>(`${apiEndPoint.TransaccionEndPoint.post}`, data)
-}
-
+    postTransaccion(data: ITransaccion): Observable<IResponse<ITransaccion>>{
+      return this.http.post<IResponse<ITransaccion>>(`${apiEndPoint.TransaccionEndPoint.post}`, data)
+  }
 }
